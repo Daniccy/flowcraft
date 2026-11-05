@@ -62,7 +62,7 @@ After downloading, load `SKILL.md` in an Agent Skills-compatible environment.
 
 ### Install with npx
 
-If Node.js 18 or later is available, install the Skill directly with:
+If Node.js 18 or later is available, you can install the Skill directly from GitHub without an npm account:
 
 ```bash
 npx --yes github:Daniccy/flowcraft init
