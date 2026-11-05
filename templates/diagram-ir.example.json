@@ -1,0 +1,443 @@
+/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+{
+  "schema_version": "1.0",
+  "meta": {
+    "title": "识别 Agent",
+    "description": "展示识别 Agent 的分批处理、准确性机制、准出门禁和规则沉淀反馈链路。",
+    "language": "zh-CN",
+    "audience": [
+      "product",
+      "engineering",
+      "risk"
+    ],
+    "source_files": [
+      "用户提供的识别 Agent 流程图"
+    ]
+  },
+  "diagram_type": "agent_architecture",
+  "direction": "LR",
+  "sections": [
+    {
+      "id": "batching",
+      "label": "三层分批",
+      "purpose": "控制每次调用规模",
+      "order": 1
+    },
+    {
+      "id": "accuracy",
+      "label": "准确性机制",
+      "purpose": "每次 LLM 调用后执行",
+      "order": 2
+    },
+    {
+      "id": "gates",
+      "label": "准出门禁",
+      "purpose": "批次与模板聚合后执行",
+      "order": 3
+    },
+    {
+      "id": "feedback",
+      "label": "规则沉淀反哺",
+      "purpose": "人工审核后版本化生效",
+      "order": 4
+    }
+  ],
+  "actors": [
+    {
+      "id": "llm",
+      "type": "system",
+      "label": "LLM"
+    },
+    {
+      "id": "human-reviewer",
+      "type": "human",
+      "label": "人工审核"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "outer-template",
+      "type": "process",
+      "label": "Outer · 模板层",
+      "description": "加载 RulePack + 经验提示",
+      "section_id": "batching",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "加载 RulePack + 经验提示",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "middle-batch",
+      "type": "process",
+      "label": "Middle · 批次层",
+      "description": "每批处理 50 条记录",
+      "section_id": "batching",
+      "actor_id": null,
+      "attributes": {
+        "batch_size": 50
+      },
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "每批处理 50 条记录",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "inner-microbatch",
+      "type": "process",
+      "label": "Inner · micro-batch",
+      "description": "每次处理 M 条记录",
+      "section_id": "batching",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "每次处理 M 条记录",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "llm-call",
+      "type": "process",
+      "label": "LLM 调用",
+      "description": "M 条记录 × 全部适用规则",
+      "section_id": "batching",
+      "actor_id": "llm",
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "M 条记录 × 全部适用规则",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "accuracy-checks",
+      "type": "process",
+      "label": "四道准确性机制",
+      "description": "证据回指、全 no_match 复查、高风险双检、适用性显式标注",
+      "section_id": "accuracy",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "四道准确性机制",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "coverage-matrix",
+      "type": "process",
+      "label": "完整性覆盖矩阵",
+      "description": "record × rule 每格必有结论；缺失补标 review",
+      "section_id": "accuracy",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "record × rule 每格必有结论",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "trace-storage",
+      "type": "datastore",
+      "label": "Trace 落盘",
+      "description": "输入快照、输出、耗时、token；失败标记 review",
+      "section_id": "accuracy",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "输入快照 / 输出 / 耗时 / token",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "aggregate",
+      "type": "process",
+      "label": "逐层聚合",
+      "description": "micro-batch → 批次 → 模板 → 全量候选",
+      "section_id": "gates",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "micro-batch → 批次（幂等去重）→ 模板 → 全量候选",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "release-gates",
+      "type": "process",
+      "label": "八项准出门禁",
+      "description": "结构化协议、证据覆盖、排除项、规则冲突、批次完整性、统计自检、命中分布、幂等性",
+      "section_id": "gates",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "八项准出门禁",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "candidate-list",
+      "type": "output",
+      "label": "CandidateList",
+      "description": "通过门禁后写入候选区",
+      "section_id": "gates",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "通过 → CandidateList",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "review-fallback",
+      "type": "output",
+      "label": "补标 review",
+      "description": "失败或预算耗尽时保留已处理结果，未处理记录补标 review",
+      "section_id": "gates",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "失败 / 预算耗尽 → 补标 review",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "rule-draft",
+      "type": "process",
+      "label": "规则沉淀 · draft",
+      "description": "proposedRules 仅存储，不参与识别",
+      "section_id": "feedback",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "proposedRules → draft；不参与识别",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "manual-review",
+      "type": "decision",
+      "label": "人工审核",
+      "description": "通过 / 驳回 / 修订",
+      "section_id": "feedback",
+      "actor_id": "human-reviewer",
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "通过 / 驳回 / 修订",
+          "certainty": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "rulepack",
+      "type": "output",
+      "label": "RulePack",
+      "description": "只加载人工审核生效的版本化规则",
+      "section_id": "feedback",
+      "actor_id": null,
+      "attributes": {},
+      "source_refs": [
+        {
+          "source": "source-diagram",
+          "quote": "只加载人工审核生效的版本化规则",
+          "certainty": "confirmed"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "outer-template",
+      "to": "middle-batch",
+      "type": "normal",
+      "label": "模板内分批",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e2",
+      "from": "middle-batch",
+      "to": "inner-microbatch",
+      "type": "normal",
+      "label": "批次拆分",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e3",
+      "from": "inner-microbatch",
+      "to": "llm-call",
+      "type": "normal",
+      "label": "提交 M 条记录",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e4",
+      "from": "llm-call",
+      "to": "accuracy-checks",
+      "type": "normal",
+      "label": "调用后校验",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e5",
+      "from": "accuracy-checks",
+      "to": "coverage-matrix",
+      "type": "normal",
+      "label": "完整性检查",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e6",
+      "from": "accuracy-checks",
+      "to": "trace-storage",
+      "type": "data",
+      "label": "记录 Trace",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e7",
+      "from": "coverage-matrix",
+      "to": "aggregate",
+      "type": "normal",
+      "label": "批次结果",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e8",
+      "from": "aggregate",
+      "to": "release-gates",
+      "type": "normal",
+      "label": "聚合后送检",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e9",
+      "from": "release-gates",
+      "to": "candidate-list",
+      "type": "success",
+      "label": "全部通过",
+      "condition": "八项准出门禁通过",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e10",
+      "from": "release-gates",
+      "to": "review-fallback",
+      "type": "failure",
+      "label": "失败 / 预算耗尽",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e11",
+      "from": "llm-call",
+      "to": "rule-draft",
+      "type": "feedback",
+      "label": "proposedRules",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e12",
+      "from": "rule-draft",
+      "to": "manual-review",
+      "type": "normal",
+      "label": "提交审核",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e13",
+      "from": "manual-review",
+      "to": "rulepack",
+      "type": "success",
+      "label": "审核通过并版本化",
+      "condition": "人工审核通过",
+      "certainty": "confirmed",
+      "source_refs": []
+    },
+    {
+      "id": "e14",
+      "from": "rulepack",
+      "to": "outer-template",
+      "type": "feedback",
+      "label": "下轮 Run 生效",
+      "certainty": "confirmed",
+      "source_refs": []
+    }
+  ],
+  "legends": [
+    {
+      "key": "blue",
+      "meaning": "分批与主流程"
+    },
+    {
+      "key": "amber",
+      "meaning": "准确性机制"
+    },
+    {
+      "key": "green",
+      "meaning": "校验与落盘"
+    },
+    {
+      "key": "red",
+      "meaning": "准出门禁与失败路径"
+    },
+    {
+      "key": "purple",
+      "meaning": "规则沉淀与反馈"
+    }
+  ],
+  "notes": [
+    {
+      "text": "draft 不进入识别准入；经验提示自动沉淀但仅作参考。",
+      "certainty": "confirmed"
+    }
+  ]
+}
