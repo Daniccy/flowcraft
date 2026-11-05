@@ -1,4 +1,4 @@
-
+/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
 # FlowCraft
 
 ### Turn Business Logic into Professional Visuals
@@ -59,6 +59,20 @@ cd flowcraft
 ```
 
 After downloading, load `SKILL.md` in an Agent Skills-compatible environment.
+
+### Install with npx
+
+If Node.js 18 or later is available, install the Skill directly with:
+
+```bash
+npx flowcraft init
+```
+
+By default, this installs to `.agents/skills/flowcraft/` in the current directory. You can also choose a target directory:
+
+```bash
+npx flowcraft init .agents/skills/flowcraft
+```
 
 ### Use FlowCraft
 
