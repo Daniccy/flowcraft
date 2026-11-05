@@ -49,10 +49,24 @@ Draw.io、Mermaid、PlantUML 等工具可以作为输入或输出适配器，但
 FlowCraft 把业务理解、结构化建模、布局规划和视觉生成拆成独立阶段，减少逻辑与表现混在一起的问题。
 
 ## ⚙️ Quick Start
-1. Clone or download this repository.
-2. Load `SKILL.md` in an Agent Skills-compatible environment.
-3. Provide business requirements, a PRD, technical documentation, or an existing diagram.
-4. Ask FlowCraft to extract logic, validate it, plan the layout, and render the diagram.
+### Download
+
+**网页下载：** 打开仓库主页，点击 `Code` → `Download ZIP`，解压后保留完整目录结构。
+
+**命令行下载：**
+
+```bash
+git clone https://github.com/Daniccy/flowcraft.git
+cd flowcraft
+```
+
+下载后，将 `SKILL.md` 加载到支持 Agent Skills 的环境中，再提供业务需求、PRD、技术文档或现有图表。
+
+### Use FlowCraft
+
+1. Load `SKILL.md` in an Agent Skills-compatible environment.
+2. Provide business requirements, a PRD, technical documentation, or an existing diagram.
+3. Ask FlowCraft to extract logic, validate it, plan the layout, and render the diagram.
 
 Example:
 > Use FlowCraft to turn my business requirements into a professional technical diagram. Do not require a Draw.io draft. First generate and validate the diagram IR, then plan the layout, generate HTML/SVG, inspect the rendering, and export a high-resolution PNG.
