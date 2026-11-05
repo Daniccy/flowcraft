@@ -65,13 +65,13 @@ After downloading, load `SKILL.md` in an Agent Skills-compatible environment.
 If Node.js 18 or later is available, install the Skill directly with:
 
 ```bash
-npx flowcraft init
+npx --yes github:Daniccy/flowcraft init
 ```
 
 By default, this installs to `.agents/skills/flowcraft/` in the current directory. You can also choose a target directory:
 
 ```bash
-npx flowcraft init .agents/skills/flowcraft
+npx --yes github:Daniccy/flowcraft init .agents/skills/flowcraft
 ```
 
 ### Use FlowCraft
