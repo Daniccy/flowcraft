@@ -1,4 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+
 # FlowCraft
 
 ### 从业务逻辑到专业视觉表达
