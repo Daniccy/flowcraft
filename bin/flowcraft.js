@@ -13,10 +13,10 @@ if (!target) {
   console.log('FlowCraft — Turn Business Logic into Professional Visuals');
   console.log('');
   console.log('Usage:');
-  console.log('  npx flowcraft init [target-directory]');
+  console.log('  npx --yes github:Daniccy/flowcraft init [target-directory]');
   console.log('');
   console.log('Example:');
-  console.log('  npx flowcraft init .agents/skills/flowcraft');
+  console.log('  npx --yes github:Daniccy/flowcraft init .agents/skills/flowcraft');
   process.exit(0);
 }
 
