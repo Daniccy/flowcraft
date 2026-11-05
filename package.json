@@ -1,0 +1,26 @@
+/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+{
+  "name": "flowcraft",
+  "version": "2.0.0",
+  "description": "FlowCraft — turn business logic into professional visuals.",
+  "bin": {
+    "flowcraft": "bin/flowcraft.js"
+  },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "README_EN.md",
+    "references",
+    "templates",
+    "prompts",
+    "assets",
+    "bin",
+    "CHANGELOG.md",
+    "LICENSE-DECISION.md"
+  ],
+  "keywords": ["agent-skill", "diagrams", "workflow", "architecture", "svg", "html"],
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  }
+}
