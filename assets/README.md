@@ -1,9 +1,6 @@
 /Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
 # Assets
 
-请将真实渲染结果放在这里：
-- `preview-full.png`：完整架构图截图；
-- `preview-detail.png`：颜色、节点和连线局部；
-- `workflow.png`：FlowCraft 工作流图。
+当前仓库不包含预览图片或营销素材。
 
-README 中的预览图路径需要在图片文件实际放入后才会显示。不要用图库图片冒充产品效果。
+如果之后加入图片，请只放入 FlowCraft 真实渲染结果，并同步更新 README。不要使用图库图片、模拟图或未验证的效果图冒充产品预览。
