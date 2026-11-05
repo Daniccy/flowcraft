@@ -1,3 +1,4 @@
+/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
 # FlowCraft
 
 ### 从业务逻辑到专业视觉表达
@@ -60,6 +61,20 @@ cd flowcraft
 ```
 
 下载后，将 `SKILL.md` 加载到支持 Agent Skills 的环境中，再提供业务需求、PRD、技术文档或现有图表。
+
+### npx 安装
+
+如果你的环境支持 Node.js 18 或更高版本，可以直接运行：
+
+```bash
+npx flowcraft init
+```
+
+默认会安装到当前目录的 `.agents/skills/flowcraft/`。也可以指定目标目录：
+
+```bash
+npx flowcraft init .agents/skills/flowcraft
+```
 
 ### Use FlowCraft
 
