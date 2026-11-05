@@ -47,9 +47,23 @@ Many AI-generated diagrams omit business nodes, misrepresent relationships, prod
 
 ## Quick Start
 
-1. Load `SKILL.md` in an Agent Skills-compatible environment.
-2. Provide business requirements, a PRD, technical documentation, or an existing diagram.
-3. Ask FlowCraft to extract and validate the logic, plan the layout, render HTML/SVG, inspect the result, and export the requested format.
+### Download
+
+**From the GitHub webpage:** Open the repository, select `Code` → `Download ZIP`, then extract the archive while preserving the directory structure.
+
+**Using Git:**
+
+```bash
+git clone https://github.com/Daniccy/flowcraft.git
+cd flowcraft
+```
+
+After downloading, load `SKILL.md` in an Agent Skills-compatible environment.
+
+### Use FlowCraft
+
+1. Provide business requirements, a PRD, technical documentation, or an existing diagram.
+2. Ask FlowCraft to extract and validate the logic, plan the layout, render HTML/SVG, inspect the result, and export the requested format.
 
 Example:
 
