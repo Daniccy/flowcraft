@@ -64,7 +64,7 @@ cd flowcraft
 
 ### npx 安装
 
-如果你的环境支持 Node.js 18 或更高版本，可以直接运行：
+如果你的环境支持 Node.js 18 或更高版本，无需 npm 账号即可从 GitHub 直接运行：
 
 ```bash
 npx --yes github:Daniccy/flowcraft init
