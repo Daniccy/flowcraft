@@ -67,13 +67,13 @@ cd flowcraft
 如果你的环境支持 Node.js 18 或更高版本，可以直接运行：
 
 ```bash
-npx flowcraft init
+npx --yes github:Daniccy/flowcraft init
 ```
 
 默认会安装到当前目录的 `.agents/skills/flowcraft/`。也可以指定目标目录：
 
 ```bash
-npx flowcraft init .agents/skills/flowcraft
+npx --yes github:Daniccy/flowcraft init .agents/skills/flowcraft
 ```
 
 ### Use FlowCraft
