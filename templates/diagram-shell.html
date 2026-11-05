@@ -1,0 +1,68 @@
+/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlowCraft Diagram</title>
+  <style>
+    :root {
+      --canvas:#F7F9FC; --surface:#FFFFFF; --border:#DBE2EA;
+      --text-primary:#17253C; --text-secondary:#53647D; --text-muted:#8290A5;
+      --blue:#2563EB; --amber:#B96B08; --green:#26764B; --red:#C34242; --purple:#9333EA;
+    }
+    * { box-sizing:border-box; }
+    html, body { margin:0; background:var(--canvas); }
+    body { font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Helvetica Neue",Arial,sans-serif; }
+    #wrap { width:100%; max-width:2000px; margin:0 auto; }
+    svg { display:block; width:100%; height:auto; }
+    .title { fill:var(--text-primary); font-size:38px; font-weight:700; }
+    .subtitle { fill:var(--text-secondary); font-size:23px; }
+    .section-title { fill:var(--text-primary); font-size:26px; font-weight:700; }
+    .node-title { fill:var(--text-primary); font-size:22px; font-weight:650; }
+    .node-copy { fill:var(--text-secondary); font-size:19px; }
+    .panel { fill:var(--surface); stroke:var(--border); stroke-width:1.5; }
+    @media print {
+      html, body { background:#fff; }
+      #wrap { max-width:none; }
+      @page { margin:0; }
+    }
+  </style>
+</head>
+<body>
+  <main id="wrap">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 1800 1200"
+         role="img"
+         aria-labelledby="diagram-title diagram-desc">
+      <title id="diagram-title">填写图表标题</title>
+      <desc id="diagram-desc">说明图表目标、阅读顺序和范围</desc>
+      <defs>
+        <marker id="arrow-blue" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+          <path d="M0 0 L9 4.5 L0 9 Z" fill="#2563EB"/>
+        </marker>
+        <marker id="arrow-gray" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+          <path d="M0 0 L9 4.5 L0 9 Z" fill="#8290A5"/>
+        </marker>
+      </defs>
+      <rect width="1800" height="1200" fill="#F7F9FC"/>
+      <rect x="48" y="40" width="7" height="78" rx="3" fill="#2563EB"/>
+      <text class="title" x="78" y="82">图表标题</text>
+      <text class="subtitle" x="78" y="116">一句话说明这张图解释什么</text>
+      <!-- 根据 diagram-ir.json 与 layout-plan.json 替换下面的示例分区 -->
+      <rect class="panel" x="48" y="160" width="520" height="900" rx="16"/>
+      <text class="section-title" x="78" y="210">01 · 示例分区</text>
+      <rect x="80" y="250" width="456" height="120" rx="12"
+            fill="#EFF6FF" stroke="#B9D4FB" stroke-width="1.5"/>
+      <text class="node-title" x="106" y="296">示例节点</text>
+      <text class="node-copy" x="106" y="332">替换为真实业务节点与说明</text>
+      <path d="M308 370 V430" fill="none" stroke="#2563EB"
+            stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+      <rect x="80" y="440" width="456" height="120" rx="12"
+            fill="#FFFFFF" stroke="#DBE2EA" stroke-width="1.5"/>
+      <text class="node-title" x="106" y="486">下一个节点</text>
+      <text class="node-copy" x="106" y="522">按 IR 中的关系生成连线</text>
+    </svg>
+  </main>
+</body>
+</html>
