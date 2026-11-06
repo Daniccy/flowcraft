@@ -1,4 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+
 # License decision — before public launch
 
 A public GitHub repository is not automatically open source. If no license is present, default copyright generally applies.
