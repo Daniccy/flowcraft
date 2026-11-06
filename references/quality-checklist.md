@@ -1,4 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+
 # FlowCraft Quality Checklist
 
 ## A. 业务语义
