@@ -1,4 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+
 # FlowCraft Visual System
 
 ## 1. 品牌定位
