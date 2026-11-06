@@ -1,4 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+
 #!/usr/bin/env node
 
 const fs = require('fs');
