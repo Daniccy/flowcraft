@@ -1,4 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+
 # FlowCraft Quick Start Prompts
 
 ## A. 从业务文字生成专业技术图
