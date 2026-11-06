@@ -1,4 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
+
 # FlowCraft Diagram IR Specification
 
 ## 1. 目的
