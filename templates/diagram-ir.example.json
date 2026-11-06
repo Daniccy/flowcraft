@@ -1,9 +1,8 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
 {
   "schema_version": "1.0",
   "meta": {
     "title": "识别 Agent",
-    "description": "展示识别 Agent 的分批处理、准确性机制、准出门禁和规则沉淀反馈链路。",
+    "description": "展示xx的分批处理、准确性机制、准出门禁和规则沉淀反馈链路。",
     "language": "zh-CN",
     "audience": [
       "product",
@@ -11,7 +10,7 @@
       "risk"
     ],
     "source_files": [
-      "用户提供的识别 Agent 流程图"
+      "用户提供的xx 流程图"
     ]
   },
   "diagram_type": "agent_architecture",
