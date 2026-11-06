@@ -1,5 +1,4 @@
-/Users/daniccy/.rvm/scripts/rvm:29: operation not permitted: ps
-# Assets
+
 
 当前仓库不包含预览图片或营销素材。
 
